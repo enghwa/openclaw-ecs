@@ -22,5 +22,5 @@ uses the upstream OpenClaw image from the Helm chart as its base.
 
 ## Guides
 
-- [Deployer Guide](/Users/huaz/Downloads/openclaw-ecs/docs/deployer-guide.md)
-- [User Guide](/Users/huaz/Downloads/openclaw-ecs/docs/user-guide.md)
+- [Deployer Guide](docs/deployer-guide.md)
+- [User Guide](docs/user-guide.md)
