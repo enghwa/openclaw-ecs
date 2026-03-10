@@ -19,3 +19,8 @@ This repository is designed for direct operator-driven deployment:
 
 The bootstrap image is built locally by CDK from `images/openclaw-bootstrap/` and
 uses the upstream OpenClaw image from the Helm chart as its base.
+
+## Guides
+
+- [Deployer Guide](/Users/huaz/Downloads/openclaw-ecs/docs/deployer-guide.md)
+- [User Guide](/Users/huaz/Downloads/openclaw-ecs/docs/user-guide.md)
