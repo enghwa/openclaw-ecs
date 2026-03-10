@@ -1,0 +1,25 @@
+{
+  "name": "aws-cdk-openclaw",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AWS CDK TypeScript app for deploying OpenClaw on ECS Fargate",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "jest --runInBand",
+    "synth": "cdk synth",
+    "watch": "tsc -w -p tsconfig.json"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.220.0",
+    "constructs": "^10.4.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "aws-cdk": "^2.1027.0",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
+

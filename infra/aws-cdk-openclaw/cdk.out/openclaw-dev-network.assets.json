@@ -1,0 +1,20 @@
+{
+  "version": "52.0.0",
+  "files": {
+    "f954bf32e3f1b0822d37c28d0a2c80519b30fd6e24f60db4cd42744e81e9bd83": {
+      "displayName": "openclaw-dev-network Template",
+      "source": {
+        "path": "openclaw-dev-network.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-a1b4b372": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "f954bf32e3f1b0822d37c28d0a2c80519b30fd6e24f60db4cd42744e81e9bd83.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

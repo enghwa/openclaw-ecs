@@ -1,0 +1,586 @@
+{
+ "Resources": {
+  "SnapshotBucketEF976A51": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+       }
+      }
+     ]
+    },
+    "LifecycleConfiguration": {
+     "Rules": [
+      {
+       "NoncurrentVersionExpiration": {
+        "NoncurrentDays": 30
+       },
+       "Status": "Enabled"
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "Tags": [
+     {
+      "Key": "Application",
+      "Value": "openclaw"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "aws-cdk"
+     }
+    ],
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "openclaw-dev-data/SnapshotBucket/Bucket/Resource"
+   }
+  },
+  "SnapshotBucketPolicy2E68F8AC": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "SnapshotBucketEF976A51"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SnapshotBucketEF976A51",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SnapshotBucketEF976A51",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "openclaw-dev-data/SnapshotBucket/Bucket/Policy/Resource"
+   }
+  },
+  "LoggingApplicationLogGroup40E834BF": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/ecs/openclaw/main",
+    "RetentionInDays": 30,
+    "Tags": [
+     {
+      "Key": "Application",
+      "Value": "openclaw"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "aws-cdk"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "openclaw-dev-data/Logging/ApplicationLogGroup/Resource"
+   }
+  },
+  "LoggingChromiumLogGroupC6DD5277": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/ecs/openclaw/chromium",
+    "RetentionInDays": 30,
+    "Tags": [
+     {
+      "Key": "Application",
+      "Value": "openclaw"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "aws-cdk"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "openclaw-dev-data/Logging/ChromiumLogGroup/Resource"
+   }
+  },
+  "LoggingExecTunnelLogGroup6C7FDDE0": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/ecs/openclaw/exec-tunnel",
+    "RetentionInDays": 30,
+    "Tags": [
+     {
+      "Key": "Application",
+      "Value": "openclaw"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "aws-cdk"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "openclaw-dev-data/Logging/ExecTunnelLogGroup/Resource"
+   }
+  },
+  "LoggingExecuteCommandLogGroupE013A455": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "LogGroupName": "/aws/ecs/openclaw/execute-command",
+    "RetentionInDays": 30,
+    "Tags": [
+     {
+      "Key": "Application",
+      "Value": "openclaw"
+     },
+     {
+      "Key": "ManagedBy",
+      "Value": "aws-cdk"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "openclaw-dev-data/Logging/ExecuteCommandLogGroup/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0WJQQ7CIBBFz9I9jC3tCXThxoWpBzBIsaEgYxiwaQh3NwaNq/f++wLE0EHbyJW4mix35gb5EqWyTK50zdRD3idldWSHu/9axRmdUds/112Yw5kgn3A+BkzPz//zUtioCVNQujCPk4aFdi8xQCegbRYyhofko3loGCvfV+GmmZ8AAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "openclaw-dev-data/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Outputs": {
+  "ExportsOutputRefLoggingExecuteCommandLogGroupE013A45560B14A96": {
+   "Value": {
+    "Ref": "LoggingExecuteCommandLogGroupE013A455"
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputRefLoggingExecuteCommandLogGroupE013A45560B14A96"
+   }
+  },
+  "ExportsOutputFnGetAttSnapshotBucketEF976A51Arn79E6FE05": {
+   "Value": {
+    "Fn::GetAtt": [
+     "SnapshotBucketEF976A51",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputFnGetAttSnapshotBucketEF976A51Arn79E6FE05"
+   }
+  },
+  "ExportsOutputRefLoggingApplicationLogGroup40E834BFE34DEFAA": {
+   "Value": {
+    "Ref": "LoggingApplicationLogGroup40E834BF"
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputRefLoggingApplicationLogGroup40E834BFE34DEFAA"
+   }
+  },
+  "ExportsOutputRefSnapshotBucketEF976A51100C046E": {
+   "Value": {
+    "Ref": "SnapshotBucketEF976A51"
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputRefSnapshotBucketEF976A51100C046E"
+   }
+  },
+  "ExportsOutputRefLoggingChromiumLogGroupC6DD5277BCB59220": {
+   "Value": {
+    "Ref": "LoggingChromiumLogGroupC6DD5277"
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputRefLoggingChromiumLogGroupC6DD5277BCB59220"
+   }
+  },
+  "ExportsOutputRefLoggingExecTunnelLogGroup6C7FDDE021EA606B": {
+   "Value": {
+    "Ref": "LoggingExecTunnelLogGroup6C7FDDE0"
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputRefLoggingExecTunnelLogGroup6C7FDDE021EA606B"
+   }
+  },
+  "ExportsOutputFnGetAttLoggingApplicationLogGroup40E834BFArnC4208F20": {
+   "Value": {
+    "Fn::GetAtt": [
+     "LoggingApplicationLogGroup40E834BF",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputFnGetAttLoggingApplicationLogGroup40E834BFArnC4208F20"
+   }
+  },
+  "ExportsOutputFnGetAttLoggingChromiumLogGroupC6DD5277ArnF08EC09F": {
+   "Value": {
+    "Fn::GetAtt": [
+     "LoggingChromiumLogGroupC6DD5277",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputFnGetAttLoggingChromiumLogGroupC6DD5277ArnF08EC09F"
+   }
+  },
+  "ExportsOutputFnGetAttLoggingExecTunnelLogGroup6C7FDDE0ArnB688E608": {
+   "Value": {
+    "Fn::GetAtt": [
+     "LoggingExecTunnelLogGroup6C7FDDE0",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "openclaw-dev-data:ExportsOutputFnGetAttLoggingExecTunnelLogGroup6C7FDDE0ArnB688E608"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,37 @@
+{
+  "version": "52.0.0",
+  "files": {
+    "d20a2fde26bdec6a2106b4233681e3fde997e76145d7ef978df62d13f505f8b6": {
+      "displayName": "openclaw-dev-compute Template",
+      "source": {
+        "path": "openclaw-dev-compute.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-1275ced4": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "d20a2fde26bdec6a2106b4233681e3fde997e76145d7ef978df62d13f505f8b6.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "fc9a7a0ca33c328efd98ac2e9b049177bca91f701e192e5d36266d8e83548947": {
+      "displayName": "OpenClawService/TaskDefinition/OpenClawMain/AssetImage",
+      "source": {
+        "directory": "asset.fc9a7a0ca33c328efd98ac2e9b049177bca91f701e192e5d36266d8e83548947",
+        "dockerBuildArgs": {
+          "OPENCLAW_IMAGE": "ghcr.io/openclaw/openclaw:2026.3.7"
+        }
+      },
+      "destinations": {
+        "current_account-current_region-05609eb3": {
+          "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}",
+          "imageTag": "fc9a7a0ca33c328efd98ac2e9b049177bca91f701e192e5d36266d8e83548947",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  }
+}
